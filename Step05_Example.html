@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step05_Example.html</title>
+	<style>
+		.my-ani{
+			/* animation property 를 한줄로 나열 하기 */
+			animation: myAni 0.4s ease-out;
+		}
+		@keyframes myAni{
+			0%{
+				transform: translateY(-100px);
+			}
+			100%{
+				transform: translateY(0px);
+			}
+		}		
+	</style>
+</head>
+<body>
+	<input type="text" id="inputMsg">
+	<button id="addBtn">추가</button>
+	<ul id="msgList">
+		
+	</ul>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var cnt = 0;
+		$("#addBtn").click(function(){
+			var v = $("#inputMsg").val();
+
+			$("<li>")
+			.text(v)
+			.appendTo("#msgList")
+			.addClass("my-ani")
+			.one("animationend", function(){
+				$(this).removeClass("my-ani");
+			});
+		});
+	</script>
+</body>
+</html>

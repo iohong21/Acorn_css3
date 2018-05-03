@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step05_Example3.html</title>
+	<link rel="stylesheet" href="css/animate.css">
+	<style>
+		.box{
+			width: 100px;
+			height: 100px;
+			background-color: #0f0;
+			border: 1px solid red;
+			cursor: pointer;
+		}
+		.bounceOutLeft{
+			animation-duration: 0.2s;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>animation 테스트</h1>
+		<div class="box animated">box</div>
+		<div class="box animated">box</div>
+		<div class="box animated">box</div>
+		<script src="js/jquery-3.3.1.js"></script>
+		<script>
+			$(".box").click(function(){
+				$(this)
+				.addClass("bounceOutLeft")
+				.one("animationend", function(){
+					// 애니메이션이 끝났을때 클래스 제거하기
+					$(this)
+					.css("visibility", "hidden")
+					.removeClass("bounceOutLeft")
+					.addClass("bounceInLeft")
+					.one("animationend", function(){
+						$(this).removeClass("bounceInLeft");
+					});
+				});
+			});
+		</script>
+	</div>
+</body>
+</html>

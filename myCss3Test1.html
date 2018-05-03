@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		td{
+			width: 30px;
+			height: 30px;
+		}
+		#cssTable td{
+			text-align: center;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body>
+	<div class="rowNum"></div>
+	<table border="1" cellspacing="0" align="center" id="cssTable">
+	</table>
+	<br>
+	<p id="info"></p>
+	<div id="msg"></div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var block = [];
+		var isPlayer1 = true;
+		var rowMax = 15, colMax = 20;
+
+		var makeBlock = function() {
+			for(var i=0; i<rowMax; i++){
+				block[i] = [];
+				for(var j=0; j<colMax; j++) {
+					block[i][j] = -1;
+				}
+			};
+		}
+
+		var makeBorder = function(mRow, mCol){
+			for(var i=0; i<mRow; i++) {
+				var element="<tr>";
+				for(var j=0; j<mCol; j++) {
+					element += "<td></td>";
+				}
+				element += "/<tr>"
+				$(element).appendTo("#cssTable");
+			}
+		}
+
+		var isBadPosition = function(y, x){
+			return ((block[y][x] == 0) || (block[y][x] == 1));
+		}
+
+		var playerInfo = function(){
+			if(isPlayer1) {
+				$("#info").text("Player1").css("color", "black");
+			} else {
+				$("#info").text("Player2").css("color", "red");
+			}
+		}
+
+		var showWinner = function(){
+			$("#msg").text((isPlayer1 ? "Player1" : "Player2") + "Win!");
+		}
+
+		var isFireX = function(y, x, token){
+			var isOK = true;
+			for(var i=x; i<x+5; i++) {
+				if(i > colMax) {
+					isOK = false;
+					break;
+				}
+				if(block[y][i] != token){
+					isOK = false;
+					break;
+				}
+			}
+
+			return isOK;
+		}
+
+		var isFireY = function(y, x, token){
+			var isOK = true;
+			for(var i=y; i<y+5; i++) {
+				if(i > rowMax) {
+					isOK = false;
+					break;
+				}
+				if(block[i][x] != token){
+					isOK = false;
+					break;
+				}
+			}
+
+			return isOK;
+		}
+
+		var isComplete = function(y, x, token){
+			var isOK = true;
+			var offset = 0;
+			while(offset++ < 5) {
+				if(x-offset < 0) {
+					isOK = false; 
+					break;
+				}
+				if(!isFireX(y, x-offset, token)) {
+					isOK = false;
+				}
+			}
+
+			if(isOK){
+				return true;
+			}
+
+			isOK = true;
+			offset = 0;
+			while(offset++ < 5) {
+				if(y-offset < 0) {
+					isOK = false;
+				}
+				if(!isFireY(y-offset, x, token)){
+					isOK = false;
+				}
+			}
+			return isOK;
+		}
+
+		makeBlock();
+		makeBorder(rowMax, colMax);
+		playerInfo();
+
+		$("#cssTable td").click(function(index){
+			var y = this.cellIndex;
+			var x = this.parentElement.rowIndex/2;
+
+			if(isBadPosition(y, x)){
+				$("#msg").text("Already use position!");
+				return;
+			}
+
+			$("#msg").text("");
+
+			if(isComplete(y, x, isPlayer1 ? 0 : 1)){
+				showWinner();
+			} else {
+				block[y][x] = isPlayer1 ? 0 : 1;
+				$(this).css("background-color", isPlayer1 ? "black" : "red");
+				isPlayer1 = !isPlayer1;
+				playerInfo();
+			}
+		});
+	</script>
+</body>
+</html>

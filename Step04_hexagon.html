@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step04_hexagon.html</title>
+	<style>
+		.wrapper{
+			perspective: 500px;
+			perspective-origin: 50% 50%;
+			margin-top: 200px;
+			border: 1px solid red;
+		}
+		.cube{
+			transform-style: preserve-3d;
+			transform-origin: 50% 50%;
+			position: relative;
+			width: 400px;
+			height: 400px;
+			margin: 0 auto; /* 가운데 정렬 */
+			transition: all 0.5s ease-out;
+			/* 뒤로 346px 밀어 넣기 */
+			transform: translateZ(-346px);
+		}
+		.cube > div{
+			position: absolute;
+			width: 400px;
+			height: 400px;
+			opacity: 1;
+			background-color: #2e272f;
+			backface-visibility: hidden;
+		}
+		.cube img{
+			width: 400px;
+			height: 400px;
+		}
+		.cube > div:nth-child(1){
+			transform: translateZ(346px);
+		}
+		.cube > div:nth-child(2){
+			transform: rotateY(60deg) translateZ(346px);
+		}
+		.cube > div:nth-child(3){
+			transform: rotateY(120deg) translateZ(346px);
+		}
+		.cube > div:nth-child(4){
+			transform: rotateY(180deg) translateZ(346px);
+		}
+		.cube > div:nth-child(5){
+			transform: rotateY(240deg) translateZ(346px);
+		}
+		.cube > div:nth-child(6){
+			transform: rotateY(300deg) translateZ(346px);
+		}
+		/*.cube:hover{
+			transform: translateZ(-346px) rotateX(-80deg);
+		}*/	
+		.buttonWrapper{
+			width: 100%;
+			/* border: 1px solid blue;*/
+		}
+		.buttonBox{
+			width: 400px;
+			height: 21px;
+			margin: 0 auto;
+			position: relative;
+			overflow: auto;
+			/*border: 1px solid green;*/
+		}
+		.buttonBox > button {
+			/*overflow: auto;*/
+			position: absolute;
+			display: inline-block;
+		}
+		#prevBtn{
+			top: 0;
+			left: 0;
+		}
+		#nextBtn{
+			top: 0;
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="cube">
+			<div><img src="images/image1.png" draggable="false"></div>
+			<div><img src="images/image2.png" draggable="false"></div>
+			<div><img src="images/image3.png" draggable="false"></div>
+			<div><img src="images/image4.png" draggable="false"></div>
+			<div><img src="images/image5.png" draggable="false"></div>
+			<div><img src="images/image6.png" draggable="false"></div>
+		</div>
+	</div>
+	<div class="buttonWrapper">
+		<div class="buttonBox">
+			<button id="prevBtn">&lt;</button>
+			<button id="nextBtn">&gt;</button>
+		</div>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var pos = { X:0, Y:0 };
+		$(".cube img").mousedown(function(event){
+			pos.X = event.offsetX;
+			pos.Y = event.offsetY;
+			$(".cube img").css("cursor", "pointer");
+		});
+
+		$(".cube img").mouseup(function(event){
+			console.log("offset.X: "+event.offsetX+"  ,  offset.Y: "+event.offsetY);
+			if(pos.X != event.offsetX || pos.Y != event.offsetY) {
+				var gapX = event.offsetX - pos.X;
+				var gapY = event.offsetY - pos.Y;
+				if(Math.abs(gapX) > Math.abs(gapY)) {
+					rotateLeftRight(gapX > 0 ? 1 : -1);
+				} 
+			}
+			$(".cube img").css("cursor", "default");
+		});
+
+		function getAngleNtz(n, width) {
+			var angle = Math.round(360 / n);
+			var tz = Math.round((width / 2) / Math.tan((angle * Math.PI) / (2 * 180)));
+			var obj = {
+			  angle: angle,
+			  tz: tz
+			};
+			return obj;
+		}
+
+		var r = 0;
+		function rotateLeftRight(lr) {
+			r += (60 * lr)
+			$(".cube").css("transform", "translateZ(-346px) rotateY("+r+"deg)");		
+		};
+
+		$("#prevBtn").click(function(){
+			rotateLeftRight(-1);
+		});
+		$("#nextBtn").click(function(){
+			rotateLeftRight(1);
+		});
+	</script>	
+</body>
+</html>

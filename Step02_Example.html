@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step02_Example.html</title>
+	<style>
+		.effect1{
+			/* linear, ease-in, ease-out, ease-in-out */
+			transition: margin-left 0.4s linear;
+		}
+		.effect2{
+			/* linear, ease-in, ease-out, ease-in-out */
+			transition: margin-left 0.4s ease-in;
+		}
+		.effect3{
+			/* linear, ease-in, ease-out, ease-in-out */
+			transition: margin-left 0.4s ease-out;
+		}
+		.effect4{
+			/* linear, ease-in, ease-out, ease-in-out */
+			transition: margin-left 0.4s ease-in-out;
+		}
+	</style>
+</head>
+<body>
+	<button id="moveBtn">눌러보셈</button>
+	<button id="easeIn">easeIn</button>
+	<button id="easeOut">easeOut</button>
+	<button id="easeInOut">easeInOut</button>
+	<br>
+	<img src="images/kim1.png">
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		$("#moveBtn").click(function(){
+			$("img")
+			.css("transition", "margin-left 0.4s linear")
+			.css("margin-left","300px");
+		});
+		$("#easeIn").click(function(){
+			$("img")
+			.css("transition", "margin-left 0.4s ease-in")
+			.css("margin-left","300px");
+		});
+		$("#easeOut").click(function(){
+			$("img")
+			.css("transition", "margin-left 0.4s ease-out")
+			.css("margin-left","300px");
+		});
+		$("#easeInOut").click(function(){
+			$("img")
+			.css({
+				"transition":"margin-left 0.4s ease-in-out",
+			    "margin-left":"300px"
+			});
+		});
+	</script>
+</body>
+</html>

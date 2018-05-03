@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step05_Example2.html</title>
+	<link rel="stylesheet" href="css/animate.css">
+	<style>
+		.bounceInDown{
+			animation-duration: 0.4s;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="inputMsg">
+	<button id="addBtn">추가</button>
+	<ul id="msgList">
+		
+	</ul>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var cnt = 0;
+		$("#addBtn").click(function(){
+			var v = $("#inputMsg").val();
+
+			$("<li>")
+			.text(v)
+			.appendTo("#msgList")
+			.addClass("animated bounceInDown");
+			$("#inputMsg").val("");
+		});
+	</script>
+</body>
+</html>

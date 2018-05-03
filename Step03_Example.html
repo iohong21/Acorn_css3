@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step03_Example.html</title>
+	<style>
+		.wrapper{
+			text-align: center;
+		}
+		img{
+			transition: transform 0.2s ease-out;
+		}
+	</style>
+</head>
+<body>
+	<h1>transform 테스트</h1>
+	<button id="leftBtn">좌</button>
+	<button id="rightBtn">우</button>
+	<button id="rotateBtn">회전</button>
+	<br>
+	<div class="wrapper">
+		<img src="images/kim1.png"/>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var pos = 0, r = 0;
+
+		var move=function(){
+			$(".wrapper img").css("transform", "translateX("+pos+"px) rotate(" + r + "deg)");
+		};
+		$("#leftBtn").click(function(){
+			pos -= 50;
+			move();
+		});
+
+		$("#rightBtn").click(function(){
+			pos += 50;
+			move();
+		});
+		$("#rotateBtn").click(function(){
+			r += 45;
+			move();
+		});
+	</script>
+</body>
+</html>

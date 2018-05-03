@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		.main{
+			width: 90%;
+			margin: 0 auto;
+			border: 1px solid red;
+		}
+		.container{
+			display: flex;
+			justify-content: center;
+			background-color: black;
+		}
+		.container > div{
+			background-color: #f1f1f1;
+			margin: 50px;
+			padding: 20px;
+			line-height: 75px;
+			font-size: 20px;
+		}
+		.container > a{
+			display: block;
+			margin: 0px;
+			padding: 10px;
+			font-size: 20px;
+			text-decoration: none;
+			color: white;
+			height: 10%;
+		}
+		.container > a:hover{
+			background-color: #f1f1f1;
+			color: black;
+
+		}
+		.extra{
+			height: 92.5%;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="container">
+			<a href="#">div1</a>
+			<a href="#">div2</a>
+			<a href="#">div3</a>
+			<a href="#">div4 ▼</a>
+		</div>
+		<div class="extra"></div>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var setHeight = function() {
+			var winHX = window.innerHeight;
+			var winH = $(window).height();
+			var sTop = $(window).scrollTop();
+
+			console.log("HX: " + winHX + "  ,  H: " + winH + ",  Top: " + sTop);
+
+			$(".main").css("height", $(window).height()-20);
+		}
+		$(document).ready(function(){
+			setHeight();
+		});
+		$(window).on("resize", function(){
+			setHeight();
+		});
+	</script>
+</body>
+</html>

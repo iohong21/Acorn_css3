@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#main{
+			width: 90%;
+			height: 650px;
+			margin: 0 auto;
+			/*border: 1px solid red;*/
+		}
+		#mainHead{
+			width: 22%;
+			font-size: 50px;
+			font-weight: bold;
+			color: red;
+			/*border: 1px solid blue;*/
+			float: left;
+		}
+		#head{
+			height: 20%;
+		}
+		#subHead{
+			width: 76%;
+			height: 66px;
+			margin-left: 10px;
+			font-weight: bold;
+			display: inline-block;
+			border-bottom: 1px solid gray;
+		}
+		#body{
+			height: 80%;
+			position: relative;
+		}
+		.gHead{
+			font-weight: bold;
+			margin: 0;
+			padding: 0;
+			height: 32px;
+			/*border: 1px solid pink;*/
+		}
+		.gap{
+			clear: both;
+			height: 10px;
+		}
+		nav{
+			background-color: black;
+			color:gray;
+			overflow: auto;
+		}
+		nav>ul{
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+		nav li{
+			float: left;
+		}
+		nav a{
+			text-decoration: none;
+			color: #999;
+			display: block;
+			padding: 10px 20px;
+		}
+		nav a:hover, nav a:focus{
+			color:white;
+			background-color: #cecece;
+		}
+		.myImage{
+			border: 1px solid red;
+			height: 90%;
+			position: relative;
+		}
+		address{
+			left:0;
+			bottom:0;
+			width: 100%;
+			border: 1px solid green;
+			position: absolute;
+			background-color: gray;
+			text-align: center;
+		}
+		.clock{
+			margin: auto;
+			height: 20%;
+			width: 70%;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="head">
+			<div id="mainHead">SHong,.</div>
+			<div id="subHead">
+				<br>HTML & JavaScript & CSS<br>Applied to Life.
+			</div>
+			<div class="gap"></div>
+			<nav>
+				<ul>
+					<li><a href="#" id="html">HTML</a></li>
+					<li><a href="#" id="javascript">JavaScripnt</a></li>
+					<li><a href="#" id="css">CSS</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div id="body">
+			<div class="myImage">
+				<div class="clock">
+					<img id="hh1" src="images/0.png"></img>
+					<img id="hh2" src="images/1.png"></img>
+					<img id="s1" src="images/colon_horizontal_center.png"></img>
+					<img id="mm1" src="images/2.png"></img>
+					<img id="mm2" src="images/3.png"></img>
+					<img id="s2" src="images/colon_horizontal_center.png"></img>
+					<img id="ss1" src="images/4.png"></img>
+					<img id="ss2" src="images/5.png"></img>
+				</div>
+				</div>
+			</div>
+			<div>
+				<address>
+					addr : bomun-ro 23 sungbuk-gu seoul korea&nbsp;&nbsp;
+					<a href="mailto:iohong21@naver.com">email us</a>&nbsp;&nbsp;
+					phone : <a href="tel:010-3472-4870">010-3472-4870</a>
+				</address>
+			<div>
+		</div>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		var time;
+		var esID;
+		var es = 0;
+		var bCnt = 0;
+		var myLogo = "SHong,.";
+
+		var tmShow = function(tmSelector, tmVal) {
+			var tmSel = document.querySelector(tmSelector);
+			var tmS;
+			if(typeof tmVal == "number") {
+				tmS = "images/" + tmVal + ".png";
+				tmSel.src = tmS;
+			}
+		}
+
+		setInterval(function() {
+			myLogo = myLogo.substr(1)+myLogo.substr(0,1);
+			$("#mainHead").text(myLogo);
+		},200);
+
+		setInterval(function() {
+			time = new Date();
+			var h = time.getHours();
+			var m = time.getMinutes();
+			var s = time.getSeconds();
+			var isRun = false;
+
+			var mok = Math.floor(h / 10);
+			var na = h % 10;
+
+			tmShow("#hh1", mok);
+			tmShow("#hh2", na);		
+			
+			mok = Math.floor(m / 10);
+			na = m % 10;	
+			tmShow("#mm1", mok);
+			tmShow("#mm2", na);		
+
+			mok = Math.floor(s / 10);
+			na = s % 10;	
+			tmShow("#ss1", mok);
+			tmShow("#ss2", na);		
+
+		}, 1000);	
+	</script>
+</body>
+</html>
